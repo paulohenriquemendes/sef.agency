@@ -1,11 +1,843 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SÉF</title>
+    <title>SÉF Agency - Transformamos Restaurantes em Referências Digitais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #432918ff;
+            --primary-dark: rgb(50, 29, 15);
+            --secondary: #fa8a00;
+            --dark: #2C3E50;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        /* Metrics Section */
+        .metrics {
+            background: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            padding: 2rem;
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+
+        .metric-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Services */
+        .services {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--light);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured .cta-button {
+            background: white;
+            color: var(--primary);
+        }
+
+        .pricing-card.featured .price {
+            color: white;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .price-period {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li:before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .pricing-card.featured .pricing-features li:before {
+            color: white;
+        }
+
+        /* Results */
+        .results {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .result-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .result-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .about-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-features li:before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .certifications {
+            margin-top: 2rem;
+        }
+
+        .cert-badge {
+            display: inline-block;
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            border: 1px solid #ddd;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">SÉF AGENCY</div>
+                <ul class="nav-links">
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#resultados">Resultados</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <a href="#contato" class="cta-button">Fale Conosco</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Especialistas em Restaurantes do Interior</div>
+            <h1>Transformamos Restaurantes em Referências Digitais</h1>
+            <p>Convertemos likes em clientes na sua porta através de estratégias que entendem o sabor local. Do digital à mesa, do like ao sabor.</p>
+            <a href="#contato" class="cta-button">Quero Mais Clientes</a>
+        </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-number">40%</span>
+                    <span class="metric-label">Aumento Médio no Movimento</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-number">3-5x</span>
+                    <span class="metric-label">ROI em 90 Dias</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-number">R$ 5-15</span>
+                    <span class="metric-label">Custo por Cliente</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-number">10+</span>
+                    <span class="metric-label">Anos de Experiência</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossas Soluções Completas</h2>
+                <p>Do diagnóstico à gestão contínua, oferecemos tudo que seu restaurante precisa para brilhar no digital</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Estratégia Digital Personalizada</h3>
+                    <p>Plano sob medida para seu restaurante com foco em resultados mensuráveis</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📸</div>
+                    <h3>Fotografia Gastronômica Profissional</h3>
+                    <p>Imagens que capturam a essência e fazem dar água na boca</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Gestão Completa de Redes</h3>
+                    <p>Instagram, Facebook e Google Meu Negócio otimizados</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Cardápios Digitais Inteligentes</h3>
+                    <p>Design moderno + analytics para entender seu cliente</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3>Relatórios de Performance</h3>
+                    <p>Métricas claras mostrando o retorno do seu investimento</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👨‍🍳</div>
+                    <h3>Consultoria Presencial</h3>
+                    <p>Atendimento personalizado no seu estabelecimento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="planos" class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Planos que Cabem no Seu Bolso</h2>
+                <p>Investimento acessível com retorno garantido para restaurantes do interior</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Essencial Digital</h3>
+                    <div class="price">R$ 497<span class="price-period">/mês</span></div>
+                    <ul class="pricing-features">
+                        <li>Gestão do Instagram</li>
+                        <li>12 posts criativos/mês</li>
+                        <li>Google Meu Negócio</li>
+                        <li>Relatório mensal</li>
+                        <li>Suporte por WhatsApp</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('Essencial Digital')">Escolher Plano</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">MAIS POPULAR</div>
+                    <h3>Presença Completa</h3>
+                    <div class="price">R$ 697<span class="price-period">/mês</span></div>
+                    <ul class="pricing-features">
+                        <li>Tudo do Essencial +</li>
+                        <li>Gestão do Facebook</li>
+                        <li>24 posts criativos/mês</li>
+                        <li>1 sessão fotográfica</li>
+                        <li>Cardápio digital</li>
+                        <li>Relatório semanal</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('Presença Completa')">Escolher Plano</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Resultado Premium</h3>
+                    <div class="price">R$ 997<span class="price-period">/mês</span></div>
+                    <ul class="pricing-features">
+                        <li>Tudo do Completo +</li>
+                        <li>Gestão de avaliações</li>
+                        <li>2 sessões fotográficas</li>
+                        <li>Campanhas promocionais</li>
+                        <li>Consultoria presencial</li>
+                        <li>Dashboard personalizado</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('Resultado Premium')">Escolher Plano</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resultados -->
+    <section id="resultados" class="results">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resultados Comprovados</h2>
+                <p>Cases reais de restaurantes do interior que transformaram seu digital conosco</p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="result-number">+40%</span>
+                    <p>Movimento no Restaurante Cacique</p>
+                </div>
+                <div class="result-card">
+                    <span class="result-number">+60%</span>
+                    <p>Vendas no Delivery</p>
+                </div>
+                <div class="result-card">
+                    <span class="result-number">3-5x</span>
+                    <p>Retorno do Investimento</p>
+                </div>
+                <div class="result-card">
+                    <span class="result-number">8/10</span>
+                    <p>Clientes que Nos Indicam</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Não Somos Uma Agência, Somos Seus Sócios Digitais</h2>
+                    <p>Com mais de 10 anos de experiência no digital e profundo conhecimento da cultura cearense, entendemos que cada prato tem uma história. Nossa missão é garantir que ela seja contada.</p>
+                    
+                    <ul class="about-features">
+                        <li>Atendimento presencial mensal garantido</li>
+                        <li>Metodologia validada com cases reais</li>
+                        <li>Preços acessíveis para o interior</li>
+                        <li>Foco em trazer clientes para sua porta</li>
+                    </ul>
+
+                    <div class="certifications">
+                        <h4>Certificações e Especializações:</h4>
+                        <span class="cert-badge">Google UX Design</span>
+                        <span class="cert-badge">Santander Tech+</span>
+                        <span class="cert-badge">Google Project Management</span>
+                        <span class="cert-badge">10+ anos experiência</span>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div style="background: #ddd; height: 400px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--gray);">
+                        Imagem do CEO/Equipe
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pronto para Transformar seu Digital?</h2>
+                <p>Vamos conversar sobre como levar mais clientes para seu restaurante</p>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Seu Nome</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Seu WhatsApp</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="restaurant">Nome do Seu Restaurante</label>
+                        <input type="text" id="restaurant" name="restaurant" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="plan">Plano de Interesse</label>
+                        <select id="plan" name="plan">
+                            <option value="">Selecione um plano</option>
+                            <option value="Essencial Digital">Essencial Digital - R$ 497/mês</option>
+                            <option value="Presença Completa">Presença Completa - R$ 697/mês</option>
+                            <option value="Resultado Premium">Resultado Premium - R$ 997/mês</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Como podemos ajudar?</label>
+                        <textarea id="message" name="message" placeholder="Conte-nos sobre seu restaurante e objetivos..." required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%;">Solicitar Proposta Personalizada</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SÉF AGENCY</h3>
+                    <p>Transformando restaurantes do interior em referências digitais.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>📱 (85) 9XXXX-XXXX</p>
+                    <p>📧 contato@sef.agency</p>
+                    <p>📍 Chorozinho - Ceará</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <p>Instagram: @sef.agency</p>
+                    <p>GitHub: /paulohenriquemendes</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SÉF Agency. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                restaurant: document.getElementById('restaurant').value,
+                plan: document.getElementById('plan').value,
+                message: document.getElementById('message').value
+            };
+
+            // Integração com WhatsApp
+            const whatsappMessage = `Olá SÉF Agency! Me chamo *${formData.name}* do *${formData.restaurant}*. 
+Interesse no plano: *${formData.plan}*
+${formData.message}
+Meu WhatsApp: *${formData.phone}*`;
+            
+            const whatsappURL = `https://wa.me/5585999999999?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            window.open(whatsappURL, '_blank');
+            
+            // Limpar formulário
+            this.reset();
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Plan selection
+        function selectPlan(planName) {
+            document.getElementById('plan').value = planName;
+            document.getElementById('contato').scrollIntoView({
+                behavior: 'smooth'
+            });
+            document.getElementById('message').focus();
+        }
+
+        // Animações ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animação
+        document.querySelectorAll('.service-card, .pricing-card, .result-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
